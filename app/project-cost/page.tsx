@@ -40,10 +40,14 @@ export default function ProjectCostPage() {
           <p>If you only have a contractor quote and are deciding whether the work is worth doing yourself, use the <Link href="/diy-or-hire">DIY vs. hire calculator</Link>.</p>
         </section>
 
-        <aside className="ad-placeholder" aria-label="Advertisement placeholder">
-          <span>Future in-content ad placement</span>
-          <small>Kept separate from estimate inputs and totals.</small>
-        </aside>
+        <div className="ad-slot-reserved" data-ad-slot="project-mid" aria-hidden="true" />
+
+        <section className="content-section example-section">
+          <p className="eyebrow">Example</p>
+          <h2>How the estimate builds up</h2>
+          <p>With $1,200 of materials, 6% material sales tax, 16 labor hours at $85/hour, $100 of delivery or disposal, and a 10% contingency, the planning estimate is about $3,005. The important part is not that number itself; it is seeing exactly where the total came from so you can replace any assumption with a local quote or known cost.</p>
+          <p>The calculator applies contingency after the known-cost subtotal. It does not automatically add financing costs, contractor markup, insurance deductibles, or project-specific permit fees unless you enter them.</p>
+        </section>
 
         <section className="content-section">
           <p className="eyebrow">Estimate checklist</p>
