@@ -21,7 +21,7 @@ export default function RepairReplaceCalculator({ initialItem = "washer" }: { in
 
   const result = useMemo(() => {
     const expectedLife = appliances[item].typicalLife;
-    const cleanAge = Math.max(0, safeNumber(age));
+    const cleanAge = clamp(Math.max(0, safeNumber(age)), 0, 50);
     const cleanRepair = Math.max(0, safeNumber(repairCost));
     const cleanReplacement = Math.max(1, safeNumber(replacementCost, 1));
     const cleanCondition = clamp(safeNumber(condition, 3), 1, 5);
@@ -151,7 +151,7 @@ export default function RepairReplaceCalculator({ initialItem = "washer" }: { in
 
       <details>
         <summary>How this score works</summary>
-        <p>The current model weights age at 38%, repair cost versus replacement cost at 37%, overall condition at 15%, and recent repair history at 10%. These are planning weights, not engineering failure probabilities. Safety issues, active leaks, combustion concerns, electrical damage, refrigerant problems, or a professional diagnosis can override the score.</p>
+        <p>The current model weights age at 38%, repair cost versus replacement cost at 37%, overall condition at 15%, and recent repair history at 10%. The score is a weighted planning index, not a probability that the unit will fail and not a forecast of how many years it will actually last. The “life remaining” line only compares age with the typical-life benchmark. Safety issues, active leaks, combustion concerns, electrical damage, refrigerant problems, or a professional diagnosis can override the score.</p>
       </details>
     </section>
   );
