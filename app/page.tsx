@@ -3,7 +3,6 @@ import RepairReplaceCalculator from "@/components/RepairReplaceCalculator";
 import { applianceKeys, appliances } from "@/lib/appliances";
 
 const upcomingTools = [
-  ["Project cost estimator", "Build a transparent estimate from materials, labor, complexity, and contingency."],
   ["Appliance life estimator", "Estimate remaining useful life instead of relying on a single average lifespan."],
   ["Energy payback calculator", "See whether a more efficient replacement can actually repay its higher purchase price."],
 ];
@@ -24,9 +23,7 @@ export default function HomePage() {
         <div className="shell hero-inner">
           <p className="eyebrow">Free homeowner decision tools</p>
           <h1>Do the math before you spend money on a home repair.</h1>
-          <p className="hero-copy">
-            HomeRepairMath turns repair quotes, replacement costs, age, condition, and other practical inputs into clear decision guidance — with the assumptions shown.
-          </p>
+          <p className="hero-copy">HomeRepairMath turns repair quotes, replacement costs, age, condition, and other practical inputs into clear decision guidance — with the assumptions shown.</p>
           <a className="primary-link" href="#repair-or-replace">Try the calculator</a>
         </div>
       </section>
@@ -37,9 +34,7 @@ export default function HomePage() {
           <small>Reserved away from navigation and calculator controls.</small>
         </aside>
 
-        <div id="repair-or-replace">
-          <RepairReplaceCalculator />
-        </div>
+        <div id="repair-or-replace"><RepairReplaceCalculator /></div>
 
         <section className="content-section">
           <p className="eyebrow">Repair-or-replace guides</p>
@@ -55,21 +50,25 @@ export default function HomePage() {
         </section>
 
         <section className="content-section">
-          <p className="eyebrow">Another expensive decision</p>
-          <h2>DIY is not automatically the cheaper option.</h2>
-          <p>Compare a professional quote with materials, tools, your time, difficulty, and rework risk.</p>
-          <p><Link className="primary-link" href="/diy-or-hire">Try the DIY vs. hire calculator</Link></p>
+          <p className="eyebrow">More calculators</p>
+          <h2>Price the decision, not just the part.</h2>
+          <div className="link-grid">
+            <Link className="tool-card linked-card" href="/diy-or-hire">
+              <h3>DIY or hire a pro?</h3>
+              <p>Compare a professional quote with materials, tools, your time, difficulty, and rework risk.</p>
+            </Link>
+            <Link className="tool-card linked-card" href="/project-cost">
+              <h3>Project cost estimator</h3>
+              <p>Build a budget from your local material costs, labor assumptions, fees, and contingency.</p>
+            </Link>
+          </div>
         </section>
 
         <section className="content-section">
           <p className="eyebrow">Why the math matters</p>
           <h2>A repair quote alone doesn’t tell you whether a repair is smart.</h2>
-          <p>
-            A $400 repair could be an easy yes on a newer $1,800 appliance and a poor bet on an older $650 appliance. The useful question is how the repair cost compares with replacement cost, expected remaining life, condition, repair history, and future operating costs.
-          </p>
-          <p>
-            HomeRepairMath is built around showing those assumptions instead of hiding them behind a vague recommendation. Each calculator should explain what moved the result and where professional judgment still matters.
-          </p>
+          <p>A $400 repair could be an easy yes on a newer $1,800 appliance and a poor bet on an older $650 appliance. The useful question is how the repair cost compares with replacement cost, expected remaining life, condition, repair history, and future operating costs.</p>
+          <p>HomeRepairMath is built around showing those assumptions instead of hiding them behind a vague recommendation. Each calculator should explain what moved the result and where professional judgment still matters.</p>
           <p><Link href="/methodology">See exactly how the current scoring model works.</Link></p>
         </section>
 
@@ -80,22 +79,17 @@ export default function HomePage() {
 
         <section className="content-section">
           <p className="eyebrow">Planned next</p>
-          <h2>One toolkit for expensive homeowner decisions.</h2>
+          <h2>Keep expanding only where a tool adds real value.</h2>
           <div className="tool-grid">
             {upcomingTools.map(([title, copy]) => (
-              <article className="tool-card" key={title}>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
+              <article className="tool-card" key={title}><h3>{title}</h3><p>{copy}</p></article>
             ))}
           </div>
         </section>
 
         <section className="content-section methodology">
           <h2>Transparent by design</h2>
-          <p>
-            These calculators are planning tools, not guarantees. Actual repair life, local labor rates, safety requirements, permit rules, and hidden damage can change the economics. HomeRepairMath favors simple, inspectable formulas and clearly labels assumptions.
-          </p>
+          <p>These calculators are planning tools, not guarantees. Actual repair life, local labor rates, safety requirements, permit rules, and hidden damage can change the economics. HomeRepairMath favors simple, inspectable formulas and clearly labels assumptions.</p>
         </section>
       </div>
     </main>
