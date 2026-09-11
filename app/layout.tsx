@@ -46,7 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </nav>
           </div>
         </header>
-        <div id="main-content">{children}</div>
+        <div id="main-content" tabIndex={-1}>{children}</div>
         <footer className="site-footer">
           <div className="shell footer-inner">
             <div>
