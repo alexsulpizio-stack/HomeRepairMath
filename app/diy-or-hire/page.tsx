@@ -40,10 +40,14 @@ export default function DiyOrHirePage() {
           <p>Your time does not need to be valued at your wage. Use whatever hourly value makes sense to you. The point is to avoid treating eight hours of your weekend as automatically free.</p>
         </section>
 
-        <aside className="ad-placeholder" aria-label="Advertisement placeholder">
-          <span>Future in-content ad placement</span>
-          <small>Kept away from inputs and the calculator result.</small>
-        </aside>
+        <div className="ad-slot-reserved" data-ad-slot="diy-mid" aria-hidden="true" />
+
+        <section className="content-section example-section">
+          <p className="eyebrow">Example</p>
+          <h2>When a big-looking DIY savings can shrink fast</h2>
+          <p>Suppose the professional quote is $1,000. DIY materials are $300, tools are $50, and the job takes eight hours. If you value your time at $25/hour, the base DIY cost is $550. At moderate difficulty and moderate rework risk, the calculator adds a 20% planning premium, bringing the adjusted DIY cost to about $660. That still saves about $340, but the decision is much less obvious than comparing $300 of materials with a $1,000 quote.</p>
+          <p>This example is illustrative. It does not imply that 20% is the expected cost of mistakes; it simply shows how the tool keeps difficulty and rework from being treated as free.</p>
+        </section>
 
         <section className="content-section">
           <p className="eyebrow">Safety boundary</p>
