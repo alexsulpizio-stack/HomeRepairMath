@@ -67,3 +67,8 @@ Ad revenue is a secondary layer on top of useful tools. Ads must not be confused
 ## Status
 
 Functional pre-launch MVP. Public deployment, domain confirmation, contact information, analytics choice, and AdSense credentials are intentionally not hard-coded into the repository.
+
+## Deployment configuration
+
+Leave NEXT_PUBLIC_SITE_URL unset for the temporary Vercel address. Canonical URLs, sitemap, and robots use VERCEL_PROJECT_PRODUCTION_URL, falling back to VERCEL_URL and then localhost for local builds. Set NEXT_PUBLIC_SITE_URL only after a custom domain is owned and connected. Public contact is through GitHub issues, linked from /contact. No AdSense or analytics credentials are required.
+

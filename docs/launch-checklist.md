@@ -21,11 +21,11 @@ This checklist separates work that can be completed in the repository from decis
 - [x] Static route/link/metadata review
 - [ ] Final visual accessibility and mobile pass on a deployed build
 
-## Owner input required before public launch
+## Launch decisions
 
-- [ ] Confirm ownership/control of the production domain (planned: homerepairmath.com)
-- [ ] Choose the public contact method/email shown on the site
-- [ ] Choose hosting/deployment target and authorize deployment
+- [x] Use the Vercel-assigned URL until a custom domain is acquired
+- [x] Use public GitHub issues as the contact path
+- [x] Vercel deployment authorized
 
 ## Owner/account input required before monetization
 
@@ -54,3 +54,4 @@ This checklist separates work that can be completed in the repository from decis
 - [ ] Never click live ads during testing
 - [ ] Monitor Core Web Vitals, layout shift, RPM, and engagement
 - [ ] Increase ad inventory only when user experience remains strong
+
