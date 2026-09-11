@@ -39,8 +39,8 @@ This checklist separates work that can be completed in the repository from decis
 
 - [ ] Verify HTTPS and canonical domain redirects
 - [ ] Verify robots.txt and sitemap.xml on production
-- [ ] Add site to Google Search Console
-- [ ] Submit sitemap
+- [ ] Add site to Google Search Console (verification meta-tag support is code-ready via NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION)
+- [ ] Submit sitemap (production path: /sitemap.xml)
 - [ ] Confirm important pages are crawlable and render correctly without JavaScript errors
 - [ ] Build enough complete, original pages that the site does not look under construction
 - [x] Remove all visible “Future ad placement” development labels from production or replace them with live/reserved production-safe ad containers
