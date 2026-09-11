@@ -3,6 +3,8 @@ import RepairReplaceCalculator from "@/components/RepairReplaceCalculator";
 import { applianceKeys, appliances } from "@/lib/appliances";
 import { absoluteUrl } from "@/lib/site";
 
+export const metadata = { alternates: { canonical: "/" } };
+
 const upcomingTools = [
   ["Appliance life estimator", "Estimate remaining useful life instead of relying on a single average lifespan."],
   ["Energy payback calculator", "See whether a more efficient replacement can actually repay its higher purchase price."],
