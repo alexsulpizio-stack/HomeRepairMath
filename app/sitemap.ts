@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...calculatorPages,
     {
+      url: `${baseUrl}/diy-or-hire`,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/about`,
       changeFrequency: "yearly",
       priority: 0.5,
