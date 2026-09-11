@@ -43,7 +43,7 @@ This checklist separates work that can be completed in the repository from decis
 - [ ] Submit sitemap
 - [ ] Confirm important pages are crawlable and render correctly without JavaScript errors
 - [ ] Build enough complete, original pages that the site does not look under construction
-- [ ] Remove all visible “Future ad placement” development labels from production or replace them with live/reserved production-safe ad containers
+- [x] Remove all visible “Future ad placement” development labels from production or replace them with live/reserved production-safe ad containers
 - [ ] Verify privacy policy matches the actual analytics, advertising, cookies, and consent behavior
 
 ## After AdSense approval
