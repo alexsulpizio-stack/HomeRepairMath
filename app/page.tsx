@@ -3,7 +3,6 @@ import RepairReplaceCalculator from "@/components/RepairReplaceCalculator";
 import { applianceKeys, appliances } from "@/lib/appliances";
 
 const upcomingTools = [
-  ["DIY or hire a pro?", "Compare labor savings against time, difficulty, tools, permits, and risk."],
   ["Project cost estimator", "Build a transparent estimate from materials, labor, complexity, and contingency."],
   ["Appliance life estimator", "Estimate remaining useful life instead of relying on a single average lifespan."],
   ["Energy payback calculator", "See whether a more efficient replacement can actually repay its higher purchase price."],
@@ -53,6 +52,13 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </section>
+
+        <section className="content-section">
+          <p className="eyebrow">Another expensive decision</p>
+          <h2>DIY is not automatically the cheaper option.</h2>
+          <p>Compare a professional quote with materials, tools, your time, difficulty, and rework risk.</p>
+          <p><Link className="primary-link" href="/diy-or-hire">Try the DIY vs. hire calculator</Link></p>
         </section>
 
         <section className="content-section">
