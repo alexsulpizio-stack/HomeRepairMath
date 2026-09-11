@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,6 +14,12 @@ export const metadata: Metadata = {
     title: "HomeRepairMath",
     description: "The numbers behind smarter home repairs.",
     type: "website",
+    siteName: "HomeRepairMath",
+  },
+  twitter: {
+    card: "summary",
+    title: "HomeRepairMath",
+    description: "The numbers behind smarter home repairs.",
   },
   robots: {
     index: true,
@@ -26,17 +33,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <header className="site-header">
           <div className="shell header-inner">
-            <a className="brand" href="/" aria-label="HomeRepairMath home">
+            <Link className="brand" href="/" aria-label="HomeRepairMath home">
               HomeRepairMath
-            </a>
+            </Link>
             <span className="tagline">The numbers behind smarter home repairs.</span>
           </div>
         </header>
         {children}
         <footer className="site-footer">
           <div className="shell footer-inner">
-            <strong>HomeRepairMath</strong>
-            <p>Practical estimates and decision tools for homeowners. Not a substitute for a licensed professional inspection.</p>
+            <div>
+              <strong>HomeRepairMath</strong>
+              <p>Practical estimates and decision tools for homeowners. Not a substitute for a licensed professional inspection.</p>
+            </div>
+            <nav className="footer-links" aria-label="Footer navigation">
+              <Link href="/about">About</Link>
+              <Link href="/methodology">Methodology</Link>
+              <Link href="/privacy">Privacy</Link>
+              <Link href="/disclaimer">Disclaimer</Link>
+            </nav>
           </div>
         </footer>
       </body>
