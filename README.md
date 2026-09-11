@@ -72,3 +72,7 @@ Functional pre-launch MVP. Public deployment, domain confirmation, contact infor
 
 Leave NEXT_PUBLIC_SITE_URL unset for the temporary Vercel address. Canonical URLs, sitemap, and robots use VERCEL_PROJECT_PRODUCTION_URL, falling back to VERCEL_URL and then localhost for local builds. Set NEXT_PUBLIC_SITE_URL only after a custom domain is owned and connected. Public contact is through GitHub issues, linked from /contact. No AdSense or analytics credentials are required.
 
+
+## Google Search Console verification
+
+The app supports URL-prefix verification through a Google HTML meta tag without source edits. Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` in Vercel to the token value supplied by Search Console, redeploy, then verify the deployed URL-prefix property. The generated sitemap is available at `/sitemap.xml`.
