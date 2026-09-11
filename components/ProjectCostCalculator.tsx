@@ -14,10 +14,12 @@ export default function ProjectCostCalculator() {
   const result = useMemo(() => {
     const safe = (value: number) => Math.max(0, Number.isFinite(value) ? value : 0);
     const materialSubtotal = safe(materials);
-    const tax = materialSubtotal * (safe(salesTax) / 100);
+    const taxRate = Math.min(safe(salesTax), 20);
+    const contingencyRate = Math.min(safe(contingency), 50);
+    const tax = materialSubtotal * (taxRate / 100);
     const labor = safe(laborHours) * safe(laborRate);
     const knownCosts = materialSubtotal + tax + labor + safe(permits) + safe(disposal);
-    const contingencyAmount = knownCosts * (safe(contingency) / 100);
+    const contingencyAmount = knownCosts * (contingencyRate / 100);
     const total = knownCosts + contingencyAmount;
 
     return {
@@ -87,7 +89,7 @@ export default function ProjectCostCalculator() {
 
       <details>
         <summary>Why include contingency?</summary>
-        <p>Home projects often expose small unknowns after work begins. Contingency is not a prediction that something will go wrong; it is a planning allowance. Straightforward, well-scoped work may need less. Renovation, demolition, hidden conditions, or old construction may justify more.</p>
+        <p>Home projects often expose small unknowns after work begins. Contingency is not a prediction that something will go wrong; it is a planning allowance applied to the known-cost subtotal after materials tax, labor, permits, and miscellaneous costs. Straightforward, well-scoped work may need less. Renovation, demolition, hidden conditions, or old construction may justify more. This tool caps the entered tax rate at 20% and contingency at 50% to prevent accidental extreme entries.</p>
       </details>
     </section>
   );
