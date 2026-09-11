@@ -31,15 +31,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <header className="site-header">
           <div className="shell header-inner">
-            <Link className="brand" href="/" aria-label="HomeRepairMath home">
-              HomeRepairMath
-            </Link>
-            <span className="tagline">The numbers behind smarter home repairs.</span>
+            <Link className="brand" href="/" aria-label="HomeRepairMath home">HomeRepairMath</Link>
+            <nav className="primary-nav" aria-label="Primary navigation">
+              <Link href="/tools">Tools</Link>
+              <Link href="/methodology">Methodology</Link>
+              <Link href="/about">About</Link>
+            </nav>
           </div>
         </header>
-        {children}
+        <div id="main-content">{children}</div>
         <footer className="site-footer">
           <div className="shell footer-inner">
             <div>
@@ -47,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <p>Practical estimates and decision tools for homeowners. Not a substitute for a licensed professional inspection.</p>
             </div>
             <nav className="footer-links" aria-label="Footer navigation">
+              <Link href="/tools">Tools</Link>
               <Link href="/about">About</Link>
               <Link href="/methodology">Methodology</Link>
               <Link href="/privacy">Privacy</Link>
