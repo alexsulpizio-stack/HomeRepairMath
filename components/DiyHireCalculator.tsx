@@ -1,10 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
+import { calculateDiyHire } from "@/lib/calculations";
 
 export default function DiyHireCalculator() {
   const [proQuote, setProQuote] = useState(900);
@@ -15,28 +12,19 @@ export default function DiyHireCalculator() {
   const [difficulty, setDifficulty] = useState(3);
   const [redoRisk, setRedoRisk] = useState(2);
 
-  const result = useMemo(() => {
-    const safeQuote = Math.max(0, Number.isFinite(proQuote) ? proQuote : 0);
-    const safeMaterials = Math.max(0, Number.isFinite(materials) ? materials : 0);
-    const safeTools = Math.max(0, Number.isFinite(tools) ? tools : 0);
-    const safeHours = Math.max(0, Number.isFinite(hours) ? hours : 0);
-    const safeHourly = Math.max(0, Number.isFinite(hourlyValue) ? hourlyValue : 0);
-    const safeDifficulty = clamp(Number.isFinite(difficulty) ? difficulty : 3, 1, 5);
-    const safeRedoRisk = clamp(Number.isFinite(redoRisk) ? redoRisk : 3, 1, 5);
-
-    const timeCost = safeHours * safeHourly;
-    const baseDiyCost = safeMaterials + safeTools + timeCost;
-    const riskPremium = baseDiyCost * (((safeDifficulty - 1) * 0.05) + ((safeRedoRisk - 1) * 0.05));
-    const adjustedDiyCost = Math.round(baseDiyCost + riskPremium);
-    const savings = Math.round(safeQuote - adjustedDiyCost);
-    const savingsPct = safeQuote > 0 ? Math.round((savings / safeQuote) * 100) : 0;
-
-    let recommendation = "Hire a pro";
-    if (safeDifficulty <= 2 && safeRedoRisk <= 2 && savingsPct >= 25) recommendation = "DIY may make sense";
-    else if (safeDifficulty <= 3 && safeRedoRisk <= 3 && savingsPct >= 15) recommendation = "Borderline";
-
-    return { timeCost, adjustedDiyCost, savings, savingsPct, recommendation };
-  }, [difficulty, hourlyValue, hours, materials, proQuote, redoRisk, tools]);
+  const result = useMemo(
+    () =>
+      calculateDiyHire({
+        proQuote,
+        materials,
+        tools,
+        hours,
+        hourlyValue,
+        difficulty,
+        redoRisk,
+      }),
+    [difficulty, hourlyValue, hours, materials, proQuote, redoRisk, tools],
+  );
 
   return (
     <section className="calculator-card" aria-labelledby="diy-calculator-title">
