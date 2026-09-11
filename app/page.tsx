@@ -32,10 +32,7 @@ export default function HomePage() {
       </section>
 
       <div className="shell content-shell">
-        <aside className="ad-placeholder" aria-label="Advertisement placeholder">
-          <span>Future ad placement</span>
-          <small>Reserved away from navigation and calculator controls.</small>
-        </aside>
+        <div className="ad-slot-reserved" data-ad-slot="home-top" aria-hidden="true" />
 
         <div id="repair-or-replace"><RepairReplaceCalculator /></div>
 
@@ -75,10 +72,7 @@ export default function HomePage() {
           <p><Link href="/methodology">See exactly how the current scoring model works.</Link></p>
         </section>
 
-        <aside className="ad-placeholder" aria-label="Advertisement placeholder">
-          <span>Future in-content ad placement</span>
-          <small>Ads will never be styled as calculator results or required actions.</small>
-        </aside>
+        <div className="ad-slot-reserved" data-ad-slot="home-mid" aria-hidden="true" />
 
         <section className="content-section">
           <p className="eyebrow">Planned next</p>
