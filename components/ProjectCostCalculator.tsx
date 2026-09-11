@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { calculateProjectCost } from "@/lib/calculations";
 
 export default function ProjectCostCalculator() {
   const [materials, setMaterials] = useState(1200);
@@ -11,25 +12,19 @@ export default function ProjectCostCalculator() {
   const [disposal, setDisposal] = useState(100);
   const [contingency, setContingency] = useState(10);
 
-  const result = useMemo(() => {
-    const safe = (value: number) => Math.max(0, Number.isFinite(value) ? value : 0);
-    const materialSubtotal = safe(materials);
-    const taxRate = Math.min(safe(salesTax), 20);
-    const contingencyRate = Math.min(safe(contingency), 50);
-    const tax = materialSubtotal * (taxRate / 100);
-    const labor = safe(laborHours) * safe(laborRate);
-    const knownCosts = materialSubtotal + tax + labor + safe(permits) + safe(disposal);
-    const contingencyAmount = knownCosts * (contingencyRate / 100);
-    const total = knownCosts + contingencyAmount;
-
-    return {
-      tax: Math.round(tax),
-      labor: Math.round(labor),
-      knownCosts: Math.round(knownCosts),
-      contingencyAmount: Math.round(contingencyAmount),
-      total: Math.round(total),
-    };
-  }, [contingency, disposal, laborHours, laborRate, materials, permits, salesTax]);
+  const result = useMemo(
+    () =>
+      calculateProjectCost({
+        materials,
+        salesTax,
+        laborHours,
+        laborRate,
+        permits,
+        disposal,
+        contingency,
+      }),
+    [contingency, disposal, laborHours, laborRate, materials, permits, salesTax],
+  );
 
   return (
     <section className="calculator-card" aria-labelledby="project-cost-title">
