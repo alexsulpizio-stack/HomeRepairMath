@@ -1,65 +1,94 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-const presets = {
-  washer: { label: "Washing machine", life: 11 },
-  dryer: { label: "Dryer", life: 13 },
-  refrigerator: { label: "Refrigerator", life: 13 },
-  dishwasher: { label: "Dishwasher", life: 10 },
-  waterHeater: { label: "Water heater", life: 12 },
-  hvac: { label: "Central HVAC system", life: 17 },
-} as const;
-
-type PresetKey = keyof typeof presets;
+import { appliances, applianceKeys, type ApplianceKey } from "@/lib/appliances";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-export default function RepairReplaceCalculator() {
-  const [item, setItem] = useState<PresetKey>("washer");
-  const [age, setAge] = useState(7);
+function safeNumber(value: number, fallback = 0) {
+  return Number.isFinite(value) ? value : fallback;
+}
+
+export default function RepairReplaceCalculator({ initialItem = "washer" }: { initialItem?: ApplianceKey }) {
+  const [item, setItem] = useState<ApplianceKey>(initialItem);
+  const [age, setAge] = useState(Math.round(appliances[initialItem].typicalLife * 0.65));
   const [repairCost, setRepairCost] = useState(350);
   const [replacementCost, setReplacementCost] = useState(900);
   const [condition, setCondition] = useState(3);
+  const [priorRepairs, setPriorRepairs] = useState(0);
 
   const result = useMemo(() => {
-    const expectedLife = presets[item].life;
-    const ageRatio = clamp(age / expectedLife, 0, 1.5);
-    const repairRatio = replacementCost > 0 ? clamp(repairCost / replacementCost, 0, 2) : 2;
-    const conditionPenalty = (5 - condition) / 4;
+    const expectedLife = appliances[item].typicalLife;
+    const cleanAge = Math.max(0, safeNumber(age));
+    const cleanRepair = Math.max(0, safeNumber(repairCost));
+    const cleanReplacement = Math.max(1, safeNumber(replacementCost, 1));
+    const cleanCondition = clamp(safeNumber(condition, 3), 1, 5);
+    const cleanPriorRepairs = clamp(safeNumber(priorRepairs), 0, 5);
 
-    // Higher score favors replacement. The weights are deliberately simple and visible.
+    const ageRatio = clamp(cleanAge / expectedLife, 0, 1.5);
+    const repairRatio = clamp(cleanRepair / cleanReplacement, 0, 2);
+    const conditionPenalty = (5 - cleanCondition) / 4;
+    const repeatRepairPenalty = cleanPriorRepairs / 5;
+
+    // Higher score favors replacement. Weights remain intentionally simple and inspectable.
     const replacementScore = clamp(
-      Math.round((ageRatio * 45 + repairRatio * 40 + conditionPenalty * 15) * 100) / 100,
+      Math.round(
+        (ageRatio * 38 + repairRatio * 37 + conditionPenalty * 15 + repeatRepairPenalty * 10) * 100,
+      ) / 100,
       0,
       100,
     );
 
     const recommendation =
-      replacementScore >= 65 ? "Replace" : replacementScore >= 45 ? "Borderline" : "Repair";
+      replacementScore >= 67 ? "Replace" : replacementScore >= 43 ? "Borderline" : "Repair";
 
-    const remainingLife = Math.max(0, expectedLife - age);
-    const breakEvenRepair = Math.round(replacementCost * 0.5);
+    const remainingLife = Math.max(0, Math.round((expectedLife - cleanAge) * 10) / 10);
+    const repairPercent = Math.round((cleanRepair / cleanReplacement) * 100);
+    const breakEvenRepair = Math.round(cleanReplacement * 0.5);
 
-    return { expectedLife, replacementScore, recommendation, remainingLife, breakEvenRepair };
-  }, [age, condition, item, repairCost, replacementCost]);
+    const reasons = [
+      cleanAge >= expectedLife
+        ? `Age is at or beyond the typical ${expectedLife}-year life used by this model.`
+        : `Age is about ${Math.round(ageRatio * 100)}% of the typical life used by this model.`,
+      `The repair quote is about ${repairPercent}% of the replacement cost.`,
+      cleanPriorRepairs > 0
+        ? `${cleanPriorRepairs} prior repair${cleanPriorRepairs === 1 ? "" : "s"} increase the chance of spending more on an aging unit.`
+        : "No prior repairs were entered, which reduces replacement pressure.",
+    ];
+
+    return {
+      expectedLife,
+      replacementScore,
+      recommendation,
+      remainingLife,
+      breakEvenRepair,
+      reasons,
+    };
+  }, [age, condition, item, priorRepairs, repairCost, replacementCost]);
 
   return (
     <section className="calculator-card" aria-labelledby="calculator-title">
       <div className="calculator-heading">
-        <p className="eyebrow">Flagship tool</p>
-        <h2 id="calculator-title">Repair or replace?</h2>
+        <p className="eyebrow">Repair vs. replace calculator</p>
+        <h2 id="calculator-title">Is this repair still worth it?</h2>
         <p>Enter a few numbers to get a transparent first-pass recommendation.</p>
       </div>
 
       <div className="calculator-grid">
         <label>
           Item
-          <select value={item} onChange={(event) => setItem(event.target.value as PresetKey)}>
-            {Object.entries(presets).map(([key, preset]) => (
-              <option key={key} value={key}>{preset.label}</option>
+          <select
+            value={item}
+            onChange={(event) => {
+              const next = event.target.value as ApplianceKey;
+              setItem(next);
+              setAge(Math.round(appliances[next].typicalLife * 0.65));
+            }}
+          >
+            {applianceKeys.map((key) => (
+              <option key={key} value={key}>{appliances[key].label}</option>
             ))}
           </select>
         </label>
@@ -89,6 +118,11 @@ export default function RepairReplaceCalculator() {
             <option value="5">Excellent</option>
           </select>
         </label>
+
+        <label>
+          Repairs in last 2 years
+          <input type="number" min="0" max="5" value={priorRepairs} onChange={(e) => setPriorRepairs(Number(e.target.value))} />
+        </label>
       </div>
 
       <div className={`result result-${result.recommendation.toLowerCase()}`} aria-live="polite">
@@ -103,14 +137,21 @@ export default function RepairReplaceCalculator() {
       </div>
 
       <div className="result-notes">
-        <p><strong>Typical life:</strong> about {result.expectedLife} years.</p>
+        <p><strong>Typical life used:</strong> about {result.expectedLife} years.</p>
         <p><strong>Estimated life remaining:</strong> {result.remainingLife > 0 ? `about ${result.remainingLife} years` : "at or beyond typical life"}.</p>
         <p><strong>50% rule reference:</strong> a repair around ${result.breakEvenRepair.toLocaleString()} is half the replacement cost.</p>
       </div>
 
+      <div className="reason-list" aria-label="Factors affecting the result">
+        <strong>What moved the result</strong>
+        <ul>
+          {result.reasons.map((reason) => <li key={reason}>{reason}</li>)}
+        </ul>
+      </div>
+
       <details>
         <summary>How this score works</summary>
-        <p>The current MVP weights age at 45%, repair cost versus replacement cost at 40%, and overall condition at 15%. It is a decision aid, not a diagnosis. Future versions will use item-specific failure patterns and efficiency differences.</p>
+        <p>The current model weights age at 38%, repair cost versus replacement cost at 37%, overall condition at 15%, and recent repair history at 10%. These are planning weights, not engineering failure probabilities. Safety issues, active leaks, combustion concerns, electrical damage, refrigerant problems, or a professional diagnosis can override the score.</p>
       </details>
     </section>
   );
