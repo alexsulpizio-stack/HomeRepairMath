@@ -2,21 +2,24 @@
 
 This checklist separates work that can be completed in the repository from decisions or credentials that require the owner.
 
-## Code and content — can be completed before owner input
+## Code and content — completed before owner input
 
 - [x] Responsive Next.js application shell
 - [x] Repair-vs-replace calculator
 - [x] Dedicated repair-vs-replace landing pages
 - [x] DIY-vs-hire calculator
+- [x] Project cost estimator
+- [x] Crawlable tools index and primary navigation
 - [x] About, methodology, privacy, and disclaimer pages
 - [x] Sitemap, robots, manifest, canonical metadata
 - [x] Structured data for core tools
+- [x] Generated favicon and social-sharing image
 - [x] Reserved ad placements away from interactive controls
 - [x] CI lint/build workflow
 - [x] Basic security headers
-- [ ] CI green on current main branch
-- [ ] Final accessibility and mobile pass
-- [ ] Final broken-link and metadata review
+- [x] CI green on current main branch
+- [x] Static route/link/metadata review
+- [ ] Final visual accessibility and mobile pass on a deployed build
 
 ## Owner input required before public launch
 
