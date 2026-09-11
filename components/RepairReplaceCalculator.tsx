@@ -2,14 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { appliances, applianceKeys, type ApplianceKey } from "@/lib/appliances";
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function safeNumber(value: number, fallback = 0) {
-  return Number.isFinite(value) ? value : fallback;
-}
+import { calculateRepairReplace } from "@/lib/calculations";
 
 export default function RepairReplaceCalculator({ initialItem = "washer" }: { initialItem?: ApplianceKey }) {
   const [item, setItem] = useState<ApplianceKey>(initialItem);
@@ -19,54 +12,18 @@ export default function RepairReplaceCalculator({ initialItem = "washer" }: { in
   const [condition, setCondition] = useState(3);
   const [priorRepairs, setPriorRepairs] = useState(0);
 
-  const result = useMemo(() => {
-    const expectedLife = appliances[item].typicalLife;
-    const cleanAge = clamp(Math.max(0, safeNumber(age)), 0, 50);
-    const cleanRepair = Math.max(0, safeNumber(repairCost));
-    const cleanReplacement = Math.max(1, safeNumber(replacementCost, 1));
-    const cleanCondition = clamp(safeNumber(condition, 3), 1, 5);
-    const cleanPriorRepairs = clamp(safeNumber(priorRepairs), 0, 5);
-
-    const ageRatio = clamp(cleanAge / expectedLife, 0, 1.5);
-    const repairRatio = clamp(cleanRepair / cleanReplacement, 0, 2);
-    const conditionPenalty = (5 - cleanCondition) / 4;
-    const repeatRepairPenalty = cleanPriorRepairs / 5;
-
-    // Higher score favors replacement. Weights remain intentionally simple and inspectable.
-    const replacementScore = clamp(
-      Math.round(
-        (ageRatio * 38 + repairRatio * 37 + conditionPenalty * 15 + repeatRepairPenalty * 10) * 100,
-      ) / 100,
-      0,
-      100,
-    );
-
-    const recommendation =
-      replacementScore >= 67 ? "Replace" : replacementScore >= 43 ? "Borderline" : "Repair";
-
-    const remainingLife = Math.max(0, Math.round((expectedLife - cleanAge) * 10) / 10);
-    const repairPercent = Math.round((cleanRepair / cleanReplacement) * 100);
-    const breakEvenRepair = Math.round(cleanReplacement * 0.5);
-
-    const reasons = [
-      cleanAge >= expectedLife
-        ? `Age is at or beyond the typical ${expectedLife}-year life used by this model.`
-        : `Age is about ${Math.round(ageRatio * 100)}% of the typical life used by this model.`,
-      `The repair quote is about ${repairPercent}% of the replacement cost.`,
-      cleanPriorRepairs > 0
-        ? `${cleanPriorRepairs} prior repair${cleanPriorRepairs === 1 ? "" : "s"} increase the chance of spending more on an aging unit.`
-        : "No prior repairs were entered, which reduces replacement pressure.",
-    ];
-
-    return {
-      expectedLife,
-      replacementScore,
-      recommendation,
-      remainingLife,
-      breakEvenRepair,
-      reasons,
-    };
-  }, [age, condition, item, priorRepairs, repairCost, replacementCost]);
+  const result = useMemo(
+    () =>
+      calculateRepairReplace({
+        expectedLife: appliances[item].typicalLife,
+        age,
+        repairCost,
+        replacementCost,
+        condition,
+        priorRepairs,
+      }),
+    [age, condition, item, priorRepairs, repairCost, replacementCost],
+  );
 
   return (
     <section className="calculator-card" aria-labelledby="calculator-title">
