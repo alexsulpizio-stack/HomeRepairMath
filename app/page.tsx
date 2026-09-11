@@ -1,6 +1,7 @@
 import Link from "next/link";
 import RepairReplaceCalculator from "@/components/RepairReplaceCalculator";
 import { applianceKeys, appliances } from "@/lib/appliances";
+import { absoluteUrl } from "@/lib/site";
 
 const upcomingTools = [
   ["Appliance life estimator", "Estimate remaining useful life instead of relying on a single average lifespan."],
@@ -12,7 +13,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "HomeRepairMath",
-    url: "https://homerepairmath.com/",
+    url: absoluteUrl("/"),
     description: "Free homeowner calculators for repair, replacement, cost, and maintenance decisions.",
   };
 
