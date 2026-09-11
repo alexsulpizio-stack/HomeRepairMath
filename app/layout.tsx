@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   },
   description:
     "Free calculators that help homeowners decide whether to repair, replace, DIY, or hire a pro.",
-  metadataBase: new URL("https://homerepairmath.com"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: "HomeRepairMath",
     description: "The numbers behind smarter home repairs.",
