@@ -25,6 +25,15 @@ export default function MethodologyPage() {
       <h2>What the score means</h2>
       <p>The result is a planning score from 0 to 100. A lower number favors repair; a higher number favors replacement. Scores below 43 currently show “Repair,” scores from 43 through 66 show “Borderline,” and scores of 67 or higher show “Replace.” These thresholds are decision aids, not failure probabilities.</p>
 
+      <h2>DIY-vs-hire model</h2>
+      <p>The DIY tool starts with materials, tool costs, and the value you assign to your time. It then adds a simple planning premium: 5% of base DIY cost for each difficulty step above “very easy” and 5% for each rework-risk step above “very low,” capped by the five-level inputs. This premium is deliberately not presented as an expected-loss probability.</p>
+
+      <h2>Project-cost model</h2>
+      <p>The project estimator adds materials, capped material sales tax, labor hours multiplied by hourly rate, permits, and miscellaneous costs. Contingency is then applied to that known-cost subtotal. The interface caps sales tax at 20% and contingency at 50% to prevent accidental extreme entries from creating misleading totals.</p>
+
+      <h2>Validation and edge cases</h2>
+      <p>The calculators are checked against ordinary, boundary, and intentionally unrealistic inputs. Negative money/time values are treated as zero for calculations, repair age is capped at the interface maximum, repair history and condition are constrained to their allowed ranges, and division-by-zero cases are guarded. The validation matrix is documented in the repository so formula changes can be checked against known examples.</p>
+
       <h2>Why the model is intentionally conservative</h2>
       <p>Home equipment varies by brand, model, installation quality, usage, maintenance, climate, and failure mode. A simple public calculator should not imply more certainty than the inputs support. Item-specific models can become more detailed as reliable evidence supports them.</p>
 
