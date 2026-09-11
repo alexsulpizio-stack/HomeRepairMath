@@ -21,8 +21,8 @@ export default function DiyHireCalculator() {
     const safeTools = Math.max(0, Number.isFinite(tools) ? tools : 0);
     const safeHours = Math.max(0, Number.isFinite(hours) ? hours : 0);
     const safeHourly = Math.max(0, Number.isFinite(hourlyValue) ? hourlyValue : 0);
-    const safeDifficulty = clamp(difficulty, 1, 5);
-    const safeRedoRisk = clamp(redoRisk, 1, 5);
+    const safeDifficulty = clamp(Number.isFinite(difficulty) ? difficulty : 3, 1, 5);
+    const safeRedoRisk = clamp(Number.isFinite(redoRisk) ? redoRisk : 3, 1, 5);
 
     const timeCost = safeHours * safeHourly;
     const baseDiyCost = safeMaterials + safeTools + timeCost;
@@ -107,7 +107,7 @@ export default function DiyHireCalculator() {
 
       <details>
         <summary>How the risk adjustment works</summary>
-        <p>The calculator adds a simple planning premium as difficulty and rework risk increase. It does not price injury, code violations, permits, hidden damage, warranty loss, or catastrophic mistakes. Those factors can make professional work the better choice even when the raw dollar savings look large.</p>
+        <p>The calculator adds 5% of the base DIY cost for each step above “very easy” and another 5% for each step above “very low” rework risk, up to a 40% planning premium. That premium is not an insurance estimate or a probability of failure. It is only a way to stop a difficult project from looking artificially cheap. The tool does not price injury, code violations, permits, hidden damage, warranty loss, or catastrophic mistakes; those factors can make professional work the better choice even when the raw dollar savings look large.</p>
       </details>
     </section>
   );
