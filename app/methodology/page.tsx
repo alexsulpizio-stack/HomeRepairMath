@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { applianceKeys, appliances } from "@/lib/appliances";
 
 export const metadata: Metadata = {
-  title: "Methodology",
+  title: "Home Repair Calculator Methodology",
   description: "How HomeRepairMath calculators turn repair cost, replacement cost, age, condition, and repair history into planning guidance.",
   alternates: { canonical: "/methodology" },
 };
