@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy information for HomeRepairMath.",
+  description: "Learn how HomeRepairMath handles calculator inputs, analytics, advertising technologies, third-party links, and future privacy-policy changes.",
   alternates: { canonical: "/privacy" },
 };
 
