@@ -1,7 +1,6 @@
 "use client";
 
 import { useId } from "react";
-import { isValidNumber } from "@/lib/calculations";
 
 export default function NumberInput({ value, onChange, min = 0, max = 1_000_000_000, integer = false }: {
   value: number;
@@ -11,7 +10,7 @@ export default function NumberInput({ value, onChange, min = 0, max = 1_000_000_
   integer?: boolean;
 }) {
   const errorId = useId();
-  const invalid = !isValidNumber(value, min, max, integer);
+  const invalid = !Number.isFinite(value) || value < min || value > max || (integer && !Number.isInteger(value));
   return (
     <>
       <input type="number" inputMode={integer ? "numeric" : "decimal"} required
