@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/tools"), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/guides"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/appliance-life"), changeFrequency: "yearly", priority: 0.8 },
+    { url: absoluteUrl("/energy-payback"), changeFrequency: "yearly", priority: 0.8 },
     ...guideSlugs.map((slug) => ({ url: absoluteUrl(`/guides/${slug}`), changeFrequency: "yearly" as const, priority: 0.7 })),
     ...calculatorPages,
     { url: absoluteUrl("/diy-or-hire"), changeFrequency: "monthly", priority: 0.8 },
