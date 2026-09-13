@@ -45,6 +45,10 @@ export default function MethodologyPage() {
       <h2>Project budget</h2>
       <p>The estimator adds materials, materials tax, labor, permits and miscellaneous costs, then applies contingency to that subtotal. It uses your prices rather than a price feed. Currency results are rounded only for display, so rounded line items may differ slightly from the total.</p>
 
+      <h2>Energy-payback model</h2>
+      <p>The energy payback calculator compares the incremental upfront cost of a more efficient option with the difference between the baseline and efficient option’s annual energy costs. Simple payback is upgrade premium divided by annual energy savings. It also shows gross savings over the ownership horizon and net savings after subtracting the upgrade premium.</p>
+      <p>The tool intentionally asks for the <strong>price difference</strong> between options rather than the efficient option’s full purchase price. If a replacement is already necessary, both choices require spending money; the energy decision is whether the additional efficiency premium earns itself back. The calculation holds the entered annual energy costs constant and does not guess future utility prices, inflation, financing, maintenance, incentives, or resale value.</p>
+
       <h2>Input limits</h2>
       <p>Blank, negative, non-finite and out-of-range inputs pause the result rather than silently becoming zero. Replacement and professional quotes must be at least $1; zero is allowed for other costs. The model supports ages up to 50 years, 0–5 whole recent repairs, materials tax up to 20%, and contingency up to 50%. Other numeric inputs are limited to one billion, and totals beyond safe numeric precision are rejected.</p>
 
