@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { applianceKeys } from "@/lib/appliances";
 import { absoluteUrl } from "@/lib/site";
+import { guideSlugs } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages: MetadataRoute.Sitemap = applianceKeys.map((slug) => ({
@@ -12,6 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: absoluteUrl("/"), changeFrequency: "monthly", priority: 1 },
     { url: absoluteUrl("/tools"), changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/guides"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/appliance-life"), changeFrequency: "yearly", priority: 0.8 },
+    ...guideSlugs.map((slug) => ({ url: absoluteUrl(`/guides/${slug}`), changeFrequency: "yearly" as const, priority: 0.7 })),
     ...calculatorPages,
     { url: absoluteUrl("/diy-or-hire"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/project-cost"), changeFrequency: "monthly", priority: 0.8 },
