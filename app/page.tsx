@@ -36,7 +36,7 @@ export default function HomePage() {
           <h2>Start with the thing you’re deciding about.</h2>
           <div className="link-grid">
             {applianceKeys.map((key) => (
-              <Link className="tool-card linked-card" key={key} href={`/repair-or-replace/${key}`}>
+              <Link className="tool-card linked-card" key={key} href={"/repair-or-replace/" + key}>
                 <h3>{appliances[key].shortLabel}</h3>
                 <p>{appliances[key].intro}</p>
               </Link>
@@ -56,6 +56,14 @@ export default function HomePage() {
               <h3>Project cost estimator</h3>
               <p>Build a budget from your local material costs, labor assumptions, fees, and contingency.</p>
             </Link>
+            <Link className="tool-card linked-card" href="/appliance-life">
+              <h3>Appliance life estimator</h3>
+              <p>Estimate replacement pressure from age, condition, maintenance, and usage.</p>
+            </Link>
+            <Link className="tool-card linked-card" href="/energy-payback">
+              <h3>Energy payback calculator</h3>
+              <p>Compare the extra cost of an efficient option with annual energy savings over your ownership horizon.</p>
+            </Link>
           </div>
         </section>
 
@@ -68,16 +76,6 @@ export default function HomePage() {
         </section>
 
         <div className="ad-slot-reserved" data-ad-slot="home-mid" aria-hidden="true" />
-
-        <section className="content-section">
-          <p className="eyebrow">Planned next</p>
-          <h2>Keep expanding only where a tool adds real value.</h2>
-          <div className="tool-grid">
-            {upcomingTools.map(([title, copy]) => (
-              <article className="tool-card" key={title}><h3>{title}</h3><p>{copy}</p></article>
-            ))}
-          </div>
-        </section>
 
         <section className="content-section methodology">
           <h2>Transparent by design</h2>
