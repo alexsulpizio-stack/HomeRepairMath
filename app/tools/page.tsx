@@ -25,6 +25,18 @@ export default function ToolsPage() {
         ))}
       </div>
 
+      <h2>Planning and efficiency</h2>
+      <div className="link-grid">
+        <Link className="tool-card linked-card" href="/appliance-life">
+          <h3>Appliance life estimator</h3>
+          <p>Estimate replacement pressure from age, condition, maintenance, and usage without treating a lifespan benchmark as a failure date.</p>
+        </Link>
+        <Link className="tool-card linked-card" href="/energy-payback">
+          <h3>Energy payback calculator</h3>
+          <p>Compare an efficiency upgrade premium with annual energy savings and your expected ownership horizon.</p>
+        </Link>
+      </div>
+
       <h2>Project decisions</h2>
       <div className="link-grid">
         <Link className="tool-card linked-card" href="/diy-or-hire">
