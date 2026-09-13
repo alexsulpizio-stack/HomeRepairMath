@@ -96,13 +96,13 @@ export default async function RepairOrReplacePage({ params }: { params: Promise<
           <div className="example-grid">
             <article className="example-card">
               <h3>A repair-leaning case</h3>
-              <p>Imagine a {item.shortLabel.toLowerCase()} at roughly one-third of its typical life, in good condition, with no recent repairs. If the repair is about 20% of replacement cost, the current model usually lands firmly on the repair side.</p>
-              <p><strong>Why:</strong> low age pressure, a modest repair-to-replacement ratio, and good condition all pull the score down.</p>
+              <p>{item.repairExample}</p>
+              <p><strong>Why:</strong> younger age, isolated failure, good overall condition, and limited repair history all reduce replacement pressure.</p>
             </article>
             <article className="example-card">
               <h3>A replacement-leaning case</h3>
-              <p>Now imagine the same type of unit at or just beyond its typical life, in fair condition, with two recent repairs and a new repair quote around 70% of replacement cost. The model usually lands firmly on replacement.</p>
-              <p><strong>Why:</strong> age, repeated failures, condition, and a large repair bill all stack in the same direction.</p>
+              <p>{item.replaceExample}</p>
+              <p><strong>Why:</strong> age, major-component risk, repeated failures, or poor condition can all make another repair less attractive.</p>
             </article>
           </div>
           <p className="example-note">These are teaching examples, not price benchmarks. Use your own quote and replacement price in the calculator.</p>
