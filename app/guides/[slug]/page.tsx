@@ -8,14 +8,25 @@ export function generateStaticParams() { return guideSlugs.map((slug) => ({ slug
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const guide = getGuide((await params).slug);
   if (!guide) return {};
-  return { title: guide.title, description: guide.description, alternates: { canonical: `/guides/${guide.slug}` } };
+  const seoTitle = guide.appliance === "refrigerator" ? "Refrigerator Repair Cost: When Is It Worth It?" : guide.title;
+  return { title: seoTitle, description: guide.description, alternates: { canonical: `/guides/${guide.slug}` } };
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.description,
+    author: { "@type": "Organization", name: "HomeRepairMath" },
+    publisher: { "@type": "Organization", name: "HomeRepairMath" },
+    mainEntityOfPage: `https://homerepairmath.com/guides/${guide.slug}`,
+  };
   return (
     <main className="shell prose-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <p className="eyebrow">Repair decision guide</p>
       <h1>{guide.title}</h1>
       <p className="lead">{guide.intro}</p>
