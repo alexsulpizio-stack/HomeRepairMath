@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our Home Repair Calculators",
   description: "About HomeRepairMath and its approach to transparent homeowner decision tools.",
   alternates: { canonical: "/about" },
 };
