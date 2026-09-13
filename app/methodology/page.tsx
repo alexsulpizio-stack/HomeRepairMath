@@ -22,6 +22,14 @@ export default function MethodologyPage() {
         <li><strong>Recent repairs: 10%</strong> — repeat failures matter because the current quote may not be the last one.</li>
       </ul>
 
+      <h2>Where the lifespan benchmarks come from</h2>
+      <p>The single lifespan value used by the calculator is a planning benchmark, not a warranty or predicted failure date. Published references commonly report ranges because usage, installation, maintenance, climate, and equipment type matter. HomeRepairMath uses rounded values that sit within commonly published ranges and keeps age as only one part of the decision.</p>
+      <ul>
+        <li><a href="https://www.nachi.org/life-expectancy.htm">InterNACHI’s home-component life expectancy chart</a> publishes broad appliance and system ranges, including washers, dryers, refrigerators, dishwashers, water heaters, furnaces, heat pumps, and air conditioners.</li>
+        <li><a href="https://www.energystar.gov/saveathome/heating-cooling/replace">ENERGY STAR’s heating and cooling replacement guidance</a> treats equipment age as one signal alongside frequent repairs, comfort problems, and operating costs.</li>
+      </ul>
+      <p>Because these references do not define a universal failure age, the benchmark should be read as “typical-life context,” not “years remaining.” The calculator’s estimated-life line is simply the benchmark minus entered age and is labeled accordingly.</p>
+
       <h2>What the score means</h2>
       <p>The result is a planning score from 0 to 100. A lower number favors repair; a higher number favors replacement. Scores below 43 currently show “Repair,” scores from 43 through 66 show “Borderline,” and scores of 67 or higher show “Replace.” These thresholds are decision aids, not failure probabilities.</p>
 
