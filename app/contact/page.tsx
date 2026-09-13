@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact and Calculator Feedback",
   description: "Report a calculator issue, suggest an improvement, or ask about HomeRepairMath on GitHub.",
   alternates: { canonical: "/contact" },
 };
