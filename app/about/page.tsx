@@ -20,6 +20,10 @@ export default function AboutPage() {
       <h2>What we are not</h2>
       <p>HomeRepairMath does not inspect your home, diagnose equipment, provide contractor bids, or replace licensed professional judgment. A calculator can help organize a decision; it cannot see hidden damage or confirm that a repair is safe.</p>
 
+      <h2>Who publishes the site</h2>
+      <p>HomeRepairMath is an independent homeowner-tool project maintained by Alex Sulpizio. The project source, formula changes, and issue history are public on GitHub so calculator behavior can be inspected rather than treated as a black box.</p>
+      <p><a href="https://github.com/alexsulpizio-stack/HomeRepairMath">View the HomeRepairMath source repository on GitHub</a>.</p>
+
       <h2>How we keep the tools useful</h2>
       <p>We favor formulas that are understandable, reusable, and easy to audit. We avoid pretending that a national average is a precise local quote. When a tool uses a benchmark, the benchmark is identified as an assumption rather than presented as a guarantee.</p>
 
