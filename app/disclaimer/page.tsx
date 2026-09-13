@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Disclaimer",
+  title: "Calculator Safety and Use Disclaimer",
   description: "Important limitations and safety information for HomeRepairMath calculators.",
   alternates: { canonical: "/disclaimer" },
 };
