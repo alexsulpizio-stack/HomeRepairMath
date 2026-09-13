@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages: MetadataRoute.Sitemap = applianceKeys.map((slug) => ({
     url: absoluteUrl(`/repair-or-replace/${slug}`),
-    changeFrequency: "yearly",
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
@@ -13,8 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/"), changeFrequency: "monthly", priority: 1 },
     { url: absoluteUrl("/tools"), changeFrequency: "monthly", priority: 0.9 },
     ...calculatorPages,
-    { url: absoluteUrl("/diy-or-hire"), changeFrequency: "yearly", priority: 0.8 },
-    { url: absoluteUrl("/project-cost"), changeFrequency: "yearly", priority: 0.8 },
+    { url: absoluteUrl("/diy-or-hire"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/project-cost"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/about"), changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/methodology"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.3 },
