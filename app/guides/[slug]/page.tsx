@@ -23,6 +23,10 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <ul>{guide.signs.map((sign) => <li key={sign}>{sign}</li>)}</ul>
       <h2>A practical three-step comparison</h2>
       <ol>{guide.steps.map((step) => <li key={step}>{step}</li>)}</ol>
+      <h2>Put the number in context</h2>
+      <p>{guide.context}</p>
+      <h2>Questions to answer before spending</h2>
+      <ul>{guide.questions.map((question) => <li key={question}>{question}</li>)}</ul>
       <aside className="callout"><strong>Useful takeaway</strong><p>{guide.takeaway}</p></aside>
       <p><Link className="primary-link" href={guide.calculator}>Run the {guide.appliance} repair calculator</Link></p>
       <p><Link href="/guides">Browse all repair decision guides</Link> or read the <Link href="/methodology">methodology</Link> to see how the score is calculated.</p>
