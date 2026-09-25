@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculatorPages,
     { url: absoluteUrl("/diy-or-hire"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/project-cost"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/contractor-quote-comparison"), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/about"), changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/methodology"), changeFrequency: "yearly", priority: 0.6 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.3 },
