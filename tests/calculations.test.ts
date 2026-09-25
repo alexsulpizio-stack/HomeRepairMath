@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  calculateContractorQuote,
   calculateDiyHire,
   calculateProjectCost,
   calculateRepairReplace,
@@ -157,5 +158,54 @@ test("project cost: negative inputs sanitize to zero", () => {
     knownCosts: 0,
     contingencyAmount: 0,
     total: 0,
+  });
+});
+
+
+test("contractor quote: normalizes known exclusions and allowance gaps", () => {
+  const result = calculateContractorQuote({
+    quotedTotal: 18000,
+    knownExtras: 1800,
+    allowanceGap: 1200,
+    depositPercent: 30,
+    warrantyYears: 1,
+    confirmedScopeItems: 4,
+    totalScopeItems: 6,
+  });
+
+  assert.deepEqual(result, {
+    quotedTotal: 18000,
+    comparableTotal: 21000,
+    addedCost: 3000,
+    depositAmount: 5400,
+    depositPercent: 30,
+    warrantyYears: 1,
+    confirmedScopeItems: 4,
+    totalScopeItems: 6,
+    scopeCompletenessPct: 67,
+  });
+});
+
+test("contractor quote: sanitizes and caps user-entered values", () => {
+  const result = calculateContractorQuote({
+    quotedTotal: -100,
+    knownExtras: -50,
+    allowanceGap: 500,
+    depositPercent: 150,
+    warrantyYears: 99,
+    confirmedScopeItems: 20,
+    totalScopeItems: 6,
+  });
+
+  assert.deepEqual(result, {
+    quotedTotal: 0,
+    comparableTotal: 500,
+    addedCost: 500,
+    depositAmount: 0,
+    depositPercent: 100,
+    warrantyYears: 50,
+    confirmedScopeItems: 6,
+    totalScopeItems: 6,
+    scopeCompletenessPct: 100,
   });
 });
