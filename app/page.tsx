@@ -56,6 +56,10 @@ export default function HomePage() {
               <h3>Project cost estimator</h3>
               <p>Build a budget from your local material costs, labor assumptions, fees, and contingency.</p>
             </Link>
+            <Link className="tool-card linked-card" href="/contractor-quote-comparison">
+              <h3>Compare contractor quotes</h3>
+              <p>Normalize exclusions and allowance gaps so competing home-improvement bids are easier to compare.</p>
+            </Link>
             <Link className="tool-card linked-card" href="/appliance-life">
               <h3>Appliance life estimator</h3>
               <p>Estimate replacement pressure from age, condition, maintenance, and usage.</p>

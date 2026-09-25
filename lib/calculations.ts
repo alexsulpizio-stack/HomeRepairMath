@@ -53,6 +53,28 @@ export type ProjectCostResult = {
   total: number;
 };
 
+export type ContractorQuoteInput = {
+  quotedTotal: number;
+  knownExtras: number;
+  allowanceGap: number;
+  depositPercent: number;
+  warrantyYears: number;
+  confirmedScopeItems: number;
+  totalScopeItems?: number;
+};
+
+export type ContractorQuoteResult = {
+  quotedTotal: number;
+  comparableTotal: number;
+  addedCost: number;
+  depositAmount: number;
+  depositPercent: number;
+  warrantyYears: number;
+  confirmedScopeItems: number;
+  totalScopeItems: number;
+  scopeCompletenessPct: number;
+};
+
 export function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
@@ -158,5 +180,37 @@ export function calculateProjectCost(input: ProjectCostInput): ProjectCostResult
     knownCosts: Math.round(knownCosts),
     contingencyAmount: Math.round(contingencyAmount),
     total: Math.round(total),
+  };
+}
+
+
+export function calculateContractorQuote(input: ContractorQuoteInput): ContractorQuoteResult {
+  const quotedTotal = nonNegative(input.quotedTotal);
+  const knownExtras = nonNegative(input.knownExtras);
+  const allowanceGap = nonNegative(input.allowanceGap);
+  const depositPercent = clamp(nonNegative(input.depositPercent), 0, 100);
+  const warrantyYears = clamp(nonNegative(input.warrantyYears), 0, 50);
+  const totalScopeItems = Math.max(1, Math.round(nonNegative(input.totalScopeItems ?? 6)));
+  const confirmedScopeItems = clamp(
+    Math.round(nonNegative(input.confirmedScopeItems)),
+    0,
+    totalScopeItems,
+  );
+
+  const addedCost = knownExtras + allowanceGap;
+  const comparableTotal = quotedTotal + addedCost;
+  const depositAmount = quotedTotal * (depositPercent / 100);
+  const scopeCompletenessPct = Math.round((confirmedScopeItems / totalScopeItems) * 100);
+
+  return {
+    quotedTotal: Math.round(quotedTotal),
+    comparableTotal: Math.round(comparableTotal),
+    addedCost: Math.round(addedCost),
+    depositAmount: Math.round(depositAmount),
+    depositPercent,
+    warrantyYears,
+    confirmedScopeItems,
+    totalScopeItems,
+    scopeCompletenessPct,
   };
 }
