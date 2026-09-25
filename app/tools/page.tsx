@@ -47,6 +47,10 @@ export default function ToolsPage() {
           <h3>Project cost estimator</h3>
           <p>Build a budget from materials, labor, taxes, fees, disposal, and contingency.</p>
         </Link>
+        <Link className="tool-card linked-card" href="/contractor-quote-comparison">
+          <h3>Contractor quote comparison</h3>
+          <p>Compare bids after adding known exclusions and allowance gaps, while keeping scope, deposit, and warranty details visible.</p>
+        </Link>
       </div>
     </main>
   );
