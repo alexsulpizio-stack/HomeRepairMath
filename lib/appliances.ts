@@ -109,7 +109,7 @@ export const appliances: Record<ApplianceKey, ApplianceProfile> = {
     label: "Central HVAC system",
     shortLabel: "HVAC",
     typicalLife: 17,
-    intro: "Use a first-pass financial screen for a central heating or cooling repair decision.",
+    intro: "Compare an HVAC repair cost or estimate with replacement cost, system age, condition, and repair history before deciding whether to repair or replace.",
     repairNotes: [
       "A repair can be sensible when the system is younger, otherwise reliable, and the failed part is isolated.",
       "Professional diagnosis is especially important because system condition is difficult to infer from age alone.",
