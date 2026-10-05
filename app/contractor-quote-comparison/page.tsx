@@ -4,9 +4,9 @@ import ContractorQuoteComparisonCalculator from "@/components/ContractorQuoteCom
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contractor Quote Comparison Calculator",
+  title: "Contractor Quote Comparison Calculator | Compare Bids",
   description:
-    "Compare contractor quotes side by side, add excluded costs and allowance gaps, and check scope, deposits, and warranties before choosing a home improvement bid.",
+    "Free contractor quote comparison calculator to compare contractor quotes and bids side by side. Normalize exclusions and allowance gaps, then review scope, deposits, and warranties.",
   alternates: { canonical: "/contractor-quote-comparison" },
 };
 
@@ -65,7 +65,7 @@ export default function ContractorQuoteComparisonPage() {
 
       <section className="hero compact-hero">
         <div className="shell hero-inner">
-          <p className="eyebrow">Before you sign a home improvement contract</p>
+          <p className="eyebrow">Free contractor quote comparison calculator</p>
           <h1>Compare contractor quotes apples to apples.</h1>
           <p className="hero-copy">
             A cheaper bid is not cheaper if it leaves out work the other contractor included. Normalize
