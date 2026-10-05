@@ -13,8 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!isApplianceKey(slug)) return {};
   const item = appliances[slug];
   return {
-    title: `${item.shortLabel} Repair or Replace Calculator`,
-    description: `${item.intro} Free first-pass calculator with transparent assumptions.`,
+    title: slug === "hvac" ? "HVAC Repair Cost Calculator | Repair or Replace?" : `${item.shortLabel} Repair or Replace Calculator`,
+    description:
+      slug === "hvac"
+        ? "Free HVAC repair cost calculator to compare a heating or cooling repair estimate with replacement cost, system age, condition, and repair history."
+        : `${item.intro} Free first-pass calculator with transparent assumptions.`,
     alternates: { canonical: `/repair-or-replace/${slug}` },
   };
 }
